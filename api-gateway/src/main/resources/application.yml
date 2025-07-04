@@ -13,6 +13,8 @@ spring:
           uri: lb://driver-service
           predicates:
             - Path=/api/drivers/**
+  application:
+    name: api-gateway
 
 
 eureka:
