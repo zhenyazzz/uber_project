@@ -1,11 +1,11 @@
 package org.example.driverservice.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "drivers")
 public class Driver {
@@ -16,4 +16,8 @@ public class Driver {
     private String cartNumber;
     private String currentLocation;
     private boolean isAvailable;
+
+
+
+
 }
