@@ -13,6 +13,20 @@ import java.util.Optional;
 public class DriverService {
     private final DriverRepository driverRepository;
 
+    public List<Driver> getAllDrivers() {return driverRepository.findAll();}
+
+    public Optional<Driver> getDriverById(Long id) {return driverRepository.findById(id);}
+
+    public Driver createDriver(Driver driver) {return driverRepository.save(driver);}
+
+    public Driver updateDriver(Driver driver) {return driverRepository.save(driver);}
+
+    public void deleteDriver(Driver driver) {driverRepository.delete(driver);}
+
+    public void deleteDriverById(Long id) {driverRepository.deleteById(id);}
+
+
+
     public List<Driver> getNearbyDrivers() {
         return driverRepository.findAll();
     }
@@ -24,4 +38,5 @@ public class DriverService {
         }
         return driverRepository.save(driver.get());
     }
+
 }
