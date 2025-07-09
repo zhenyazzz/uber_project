@@ -20,6 +20,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -69,12 +70,13 @@ public class AuthController {
     @GetMapping("/validate")
     public ResponseEntity<?> validateToken(HttpServletRequest request) {
         String token = jwtUtils.getJwtFromHeader(request);
-        if (token == null || jwtUtils.validateJwtToken(token)) {
+        System.out.println(token);
+        if (token == null || !jwtUtils.validateJwtToken(token)) {
             return ResponseEntity.ok(Map.of("valid", false, "token", token));
 
         }
-        if (userService.existsByUsername(jwtUtils.getUserNameFromJwtToken(token))) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "username already exist"));
+        if (!userService.existsByUsername(jwtUtils.getUserNameFromJwtToken(token))) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "user not found"));
         }
         return ResponseEntity.ok(Map.of(
                 "valid", true,

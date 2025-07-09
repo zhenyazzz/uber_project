@@ -11,15 +11,19 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 
+logging:
+  level:
+    root: info
 
 app:
   jwt:
-    secret: "your-256-bit-secret-1234567890abcdef1234567890abcdef"
-    expirationMs: 86400000 #
+    secret: "eW91ci0yNTYtYml0LXNlY3JldC0xMjM0NTY3ODkwYWJjZGVmMTIzNDU2Nzg5MGFiY2RlZg=="
+    expirationMs: 86400000 # 24 часа
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+    registry-fetch-interval-seconds: 5
