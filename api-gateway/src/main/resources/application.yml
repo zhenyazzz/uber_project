@@ -2,22 +2,27 @@ server:
   port: 8080
 
 spring:
-  cloud:
-    gateway:
-      routes:
-        - id: order-service
-          uri: lb://order-service
-          predicates:
-            - Path=/api/orders/**
-        - id: driver-service
-          uri: lb://driver-service
-          predicates:
-            - Path=/api/drivers/**
   application:
     name: api-gateway
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: order-service
+              uri: lb://order-service
+              predicates:
+                - Path=/api/orders/**
+            - id: driver-service
+              uri: lb://driver-service
+              predicates:
+                - Path=/api/drivers/**
 
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+  instance:
+    prefer-ip-address: true

@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api.drivers")
+@RequestMapping("/api/drivers")
 @RequiredArgsConstructor
 public class DriverController {
-    @Autowired
+
     private final DriverService driverService;
 
     @GetMapping("/nearby")
